@@ -1,0 +1,84 @@
+.btn2{
+    width: 400px;
+display: flex;
+flex-direction: row;
+height: 50px;
+    /* background-color: red; */
+    margin-left: auto;
+    margin-right: auto;
+}
+.btn2 button{
+    margin-left: 70px;
+color: white;
+}
+.btn2 p{
+    padding-top: 14px;
+    padding-left: 10px;
+}
+.ft1 a {
+    text-decoration: none;
+    margin: 5px;
+    color: black;
+}
+.sub-title {
+    /* background-color: blue; */
+    margin-top: 20px;
+    margin-left: 75px;
+}
+.navbar-text::before {
+    content: 'a';
+    position: relative;
+    top: 0px;
+    left: 0px;
+    color: transparent;
+    /* padding-top: 10px; */
+    width: 5px;
+    height: 40px;
+    background-color: yellow;
+    display: inline-block;
+    /* transform: translateY(50px); */
+}
+.navbar-text i span {
+    margin-left: 10px;
+    font-size: 15px;
+}
+
+.navbar-text i {
+    margin-left: 10px;
+}
+.navbar-text p {
+    margin-left: 10px;
+}
+.navbar-text {
+    display: flex;
+    justify-content: baseline;
+    /* background-color: red; */
+    width: 200px;
+    height: 100px;
+    margin-left: 40px;
+    
+
+}
+.navbar-text img{
+    border-radius: 80px;
+    margin-left: 20px;
+    width: 20%;
+    height: 60%;
+    object-fit: cover;
+}
+.sub-title p {
+    float: right;
+    margin-left: 10px;
+    /* background-color: aqua; */
+    margin-right: 50px;
+}
+.box{
+    border: 5px solid yellow;
+    width: 350px;
+}
+.btn23{
+    margin-left: 20px;
+}
+.card23{
+    max-width: 540px;
+}
