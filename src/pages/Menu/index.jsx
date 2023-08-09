@@ -122,7 +122,7 @@ export default function Menu() {
                                     </div>
                                     <div className="col-md-8">
                                         <div className="card-body">
-                                            <h5 className="card-title">Card title</h5>
+                                            <h5 className="card-title">Menu</h5>
                                             <p className="card-text"><Link to={`/menu-detail/${item.id}`}>{item.title}</Link></p>
                                             <Link to={`/update-menu/${item.id}`}>
                                                 <button className="btn btn-primary m-2">Update</button>
