@@ -7,7 +7,7 @@ import {useNavigate} from 'react-router-dom'
 import Navbar from "../../components/navbar"
 import Footer from "../../components/Footer"
 
-let token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJhZGl0IiwiZW1haWwiOiJhZGl0QGFkbWluLmlkIiwicGhvdG8iOm51bGwsImNyZWF0ZWRfYXQiOiIyMDIzLTA3LTI1VDA5OjA5OjQ4Ljk4OVoiLCJyb2xlIjpudWxsLCJpYXQiOjE2OTE0MTQwNzV9.kZCeHLdfUPS8okS6ntFA7HZJ6lAb13sTkths5CEWsVM`
+let token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJndWVzdCIsImVtYWlsIjoiZ3Vlc3RAYWRtaW4uaWQiLCJwaG90byI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjMtMDctMjVUMDc6NTA6MTIuNTgzWiIsImlhdCI6MTY5MDI3MzU2N30.KZtPY60Ip5cZbpavNRhUwF7PXOmZXD56UYxIgXbnKe8`
 
 export default function UpdateMenu() {
     const navigate = useNavigate()
