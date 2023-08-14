@@ -4,11 +4,13 @@ import { useState } from "react";
 import {useNavigate} from 'react-router-dom'
 import Navbar from "../../components/navbar"
 import Footer from "../../components/Footer"
+import { postMenu } from './../../redux/actions/menu'
+import { useDispatch, useSelector } from "react-redux"
 
-let token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJndWVzdCIsImVtYWlsIjoiZ3Vlc3RAYWRtaW4uaWQiLCJwaG90byI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjMtMDctMjVUMDc6NTA6MTIuNTgzWiIsImlhdCI6MTY5MDI3MzU2N30.KZtPY60Ip5cZbpavNRhUwF7PXOmZXD56UYxIgXbnKe8`
 
 export default function InputMenu() {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [photo, setPhoto] = useState(null)
     const [inputData, setInputData] = useState({
         title: "",
@@ -27,15 +29,7 @@ export default function InputMenu() {
 
         console.log(BodyformData)
 
-        axios.post('http://localhost:3000/recipe', BodyformData, { headers: { Authorization: `Bearer ${token}`, "Content-Type": 'multipart/form-data' } })
-            .then((res) => {
-                console.log(res)
-                navigate('/')
-
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+        dispatch(postMenu(BodyformData,navigate))
 
     }
     const onChange = (e) => {

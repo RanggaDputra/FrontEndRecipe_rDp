@@ -1,50 +1,35 @@
 import axios from "axios"
 import { useState } from "react"
 import { useEffect } from "react"
-import { Link, useParams } from "react-router-dom"
-import Alert from "../../components/Alert"
+import { Link, useParams, useNavigate } from "react-router-dom"
 import Navbar from "../../components/navbar"
 import Footer from "../../components/Footer"
 import '../Menu/index.css'
+import { useDispatch, useSelector } from "react-redux"
+import { getMenu, deleteMenu,searchMenu } from "./../../redux/actions/menu"
+import Alert from "../../components/Alert"
 
-let token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJndWVzdCIsImVtYWlsIjoiZ3Vlc3RAYWRtaW4uaWQiLCJwaG90byI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjMtMDctMjVUMDc6NTA6MTIuNTgzWiIsImlhdCI6MTY5MDI3MzU2N30.KZtPY60Ip5cZbpavNRhUwF7PXOmZXD56UYxIgXbnKe8`
 
 export default function Menu() {
-    
-    const baseUrl = 'http://localhost:3000/recipe/detail'
-    const [menu, setMenu] = useState([])
-    const [text, setText] = useState('')
-    const [data, setData] = useState(null)
-    const [showAlert, setShowAlert] = useState(false)
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    // const [menu, setMenu] = useState([])
+    // const { menu, delete_menu } = useSelector((state) => state)
+    const {menu, delete_menu} = useSelector((state)=>state)
+    const {data,isError,errorMessage,isLoading} = menu
+    const [search,setSearch] = useState("")
+    // const [data, setData] = useState(null)
+    // const [showAlert, setShowAlert] = useState(false)
 
-    async function searchMenu() {
-        try {
-            const response = await window.fetch(`${baseUrl}?${text}`)
-            const dataSearch = await response.json();
-            setMenu(dataSearch.results)
-        } catch (e) {
-            console.log(e)
-        }
-    }
 
-    const [alertData, setAlertData] = useState({
-        type: "",
-        message: ""
-    })
 
-    const getData = () => {
-        axios.get('http://localhost:3000/recipe', { headers: { Authorization: `Bearer ${token}` } })
-            .then((res) => {
-                console.log(res)
-                setData(res.data.data)
+    // const [alertData, setAlertData] = useState({
+    //     type: "",
+    //     message: ""
+    // })
 
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }
-    // const getDataById = (id) => {
-    //     axios.get(`http://localhost:3000/recipe/${id}`, { headers: { Authorization: `Bearer ${token}` } })
+    // const getData = () => {
+    //     axios.get('http://localhost:3000/recipe', { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } })
     //         .then((res) => {
     //             console.log(res)
     //             setData(res.data.data)
@@ -55,44 +40,58 @@ export default function Menu() {
     //         })
     // }
 
-
     useEffect(() => {
-        getData()
-        setAlertData({ ...alertData, type: "primary", message: "berhasil get data" })
-        setShowAlert(true)
+
+        dispatch(getMenu())
+        // setAlertData({ ...alertData, type: "primary", message: "berhasil get data" })
+        // setShowAlert(true)
     }, [])
 
+    useEffect(()=>{
+        search.length >= 3 && dispatch(searchMenu(search))
+        search == '' &&  dispatch(getMenu())
+      },[search])
 
-    const deleteData = (id) => {
-        axios.delete(`http://localhost:3000/recipe/${id}`, { headers: { Authorization: `Bearer ${token}` } })
-            .then((res) => {
-                console.log(res)
-                getData()
-                setAlertData({ ...alertData, type: "warning", message: "berhasil hapus data" })
-                setShowAlert(true)
-            })
-            .catch((err) => {
-                console.log(err)
-                getData()
-                setAlertData({ ...alertData, type: "danger", message: err.response.data.message })
-                setShowAlert(true)
-            })
-    }
+
+    // const deleteData = (id) => {
+    //     axios.delete(`http://localhost:3000/recipe/${id}`, { headers: { Authorization: `Bearer ${token}` } })
+    //         .then((res) => {
+    //             console.log(res)
+    //             getData()
+    //             setAlertData({ ...alertData, type: "warning", message: "berhasil hapus data" })
+    //             setShowAlert(true)
+    //         })
+    //         .catch((err) => {
+    //             console.log(err)
+    //             getData()
+    //             setAlertData({ ...alertData, type: "danger", message: err.response.data.message })
+    //             setShowAlert(true)
+    //         })
+    // }
 
 
     return (
         <>
             <div className="container">
-                <Navbar/>
-                
-                {showAlert && <Alert type={alertData.type} message={alertData.message} />}
+                <Navbar />
+
+                {/* {showAlert && <Alert type={alertData.type} message={alertData.message} />} */}
+                {delete_menu.isError &&
+                    <Alert type="danger" message={delete_menu.errorMessage} />
+                }
+                {!delete_menu.isError &&
+                    <Alert type="primary" message="berhasil delete menu" />
+                }
                 <h2>Discover Recipe</h2>
                 <h2>& Delicious Food</h2>
+                {isLoading && <div className="spinner-border text-light" role="status">
+                    <span className="sr-only"></span>
+                </div>}
                 <div className="search2">
                     <div className="container-fluid">
                         <form className="d-flex" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={text} onChange={(e) => setText(e.target.value)} />
-                            <button className="btn btn-outline-success" onClick={searchMenu} >Search</button>
+                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" name='search' value={search} onChange={(e)=>setSearch(e.target.value)} />
+                            <button className="btn btn-outline-success">Search</button>
                         </form>
                     </div>
 
@@ -109,7 +108,7 @@ export default function Menu() {
                             Liked
                         </a>
                         <button type="button" className="btn btn-success btn23" ><Link to={'/inputmenu'} className="anchor">Input Menu</Link></button>
-                        
+
                     </p>
                 </div>
                 {data?.map((item, index) => {
@@ -128,7 +127,7 @@ export default function Menu() {
                                                 <button className="btn btn-primary m-2">Update</button>
                                             </Link>
 
-                                            <button className="btn btn-warning m-2" onClick={() => deleteData(item.id)}>Delete</button>
+                                            <button className="btn btn-warning m-2" onClick={() => dispatch(deleteMenu(item.id, navigate))}>Delete</button>
                                             <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p>
                                         </div>
                                     </div>
@@ -140,10 +139,10 @@ export default function Menu() {
                         </div>
                     )
                 })}
-                 <Footer/>
+                <Footer />
             </div>
 
-           
+
         </>
     )
 }
