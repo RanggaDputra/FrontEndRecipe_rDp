@@ -1,0 +1,76 @@
+html,body{
+    padding: 0;
+    margin: 0;
+}
+.txt1{
+    /* background-color: black; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.txt1 input{
+width: 400px;
+height: 50px;
+border-radius: 4px;
+
+}
+.txt-2{
+    /* background-color: white; */
+    width: 410px;
+    text-align: left;
+    
+}
+.txt-2 .label1{
+    box-shadow: 5px 5px 5px black;
+}
+#flexCheckDefault{
+    background-color: #EFC81A;
+}
+.txt-5{
+    margin-left: auto;
+    margin-right: auto;
+    width: 410px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: black; */
+}
+.form-check{
+    text-align: left;
+    width: 410px;
+    background-color: white;
+    
+}
+.nt23{
+    margin-right: 10px;
+    width: 400px;
+}
+.nt23 p{
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.txt-6{
+    margin-top: 50px;
+    /* background-color: red; */
+}
+.txt-6 p span a{
+    text-decoration: none;
+    color: #EFC81A;
+}
+h1{
+    color: #EFC81A !important;
+}
+.nt23 a{
+    
+    color: white !important;
+text-decoration: none !important;
+}
+.alrt23{
+    width: 500px !important;
+
+}
+.txt23{
+    text-decoration: none;
+    color: #EFC81A;
+}

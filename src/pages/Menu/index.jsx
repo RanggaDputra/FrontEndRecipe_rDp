@@ -6,18 +6,18 @@ import Navbar from "../../components/navbar"
 import Footer from "../../components/Footer"
 import '../Menu/index.css'
 import { useDispatch, useSelector } from "react-redux"
-import { getMenu, deleteMenu,searchMenu } from "./../../redux/actions/menu"
+import { getMenu, deleteMenu, searchMenu } from "./../../redux/actions/menu"
 import Alert from "../../components/Alert"
 
 
 export default function Menu() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    // const [menu, setMenu] = useState([])
-    // const { menu, delete_menu } = useSelector((state) => state)
-    const {menu, delete_menu} = useSelector((state)=>state)
-    const {data,isError,errorMessage,isLoading} = menu
-    const [search,setSearch] = useState("")
+    const [counter, setCounter] = useState(1)
+
+    const { menu, delete_menu } = useSelector((state) => state)
+    const { data, isError, errorMessage, isLoading } = menu
+    const [search, setSearch] = useState("")
     // const [data, setData] = useState(null)
     // const [showAlert, setShowAlert] = useState(false)
 
@@ -42,15 +42,23 @@ export default function Menu() {
 
     useEffect(() => {
 
-        dispatch(getMenu())
+        dispatch(getMenu(1))
         // setAlertData({ ...alertData, type: "primary", message: "berhasil get data" })
         // setShowAlert(true)
-    }, [])
+    }, [dispatch])
 
-    useEffect(()=>{
+    useEffect(() => {
         search.length >= 3 && dispatch(searchMenu(search))
-        search == '' &&  dispatch(getMenu())
-      },[search])
+        search == '' && dispatch(getMenu(1))
+    }, [search])
+//     const previous = () => {
+//         setCounter(counter - 1)
+//         console.log(counter)
+//     } 
+//     const next = () => {
+// setCounter(counter + 1)
+// console.log(counter)
+//     } 
 
 
     // const deleteData = (id) => {
@@ -90,12 +98,13 @@ export default function Menu() {
                 <div className="search2">
                     <div className="container-fluid">
                         <form className="d-flex" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" name='search' value={search} onChange={(e)=>setSearch(e.target.value)} />
+                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" name='search' value={search} onChange={(e) => setSearch(e.target.value)} />
                             <button className="btn btn-outline-success">Search</button>
                         </form>
                     </div>
 
                 </div>
+                {/*  */}
                 <div className="m-3">
                     <p className="d-inline-flex gap-1">
                         <a className="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -109,8 +118,13 @@ export default function Menu() {
                         </a>
                         <button type="button" className="btn btn-success btn23" ><Link to={'/inputmenu'} className="anchor">Input Menu</Link></button>
 
+                        {/* <button type="button" className="btn btn-success btn23" ><Link to={`/profil/${item.id}`} className="anchor">Input Menu</Link></button> */}
+
                     </p>
                 </div>
+                {data?.map((item,index)=> {
+
+                })}
                 {data?.map((item, index) => {
                     return (
                         <div key={item.id} onClick={() => console.log(item.id)}>
@@ -139,10 +153,16 @@ export default function Menu() {
                         </div>
                     )
                 })}
+                {/* <div className="pagination">
+                    <button onClick={previous}>Previous</button>
+                    <p>1/3</p>
+                    <button onClick={next}>Next</button>
+                </div> */}
                 <Footer />
             </div>
 
 
         </>
     )
+
 }

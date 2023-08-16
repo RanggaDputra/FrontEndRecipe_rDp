@@ -3,15 +3,28 @@ import { Link, useParams } from "react-router-dom"
 import '../navbar/index.css'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
+import { useEffect } from "react";
+import { useDispatch} from "react-redux"
+import { getProfilDetail} from './../../redux/actions/menu'
 
 export default function Navbar({ }) {
+    
+    const dispatch = useDispatch()
+    // const {data} = useSelector((state)=>state.detail_menu)
     const auth = useSelector((state) => state.auth.data)
     const navigate = useNavigate()
+    const { menuId } = useParams()
     const logout = () => {
 
         localStorage.clear()
         navigate('/')
     }
+
+    useEffect(() => {
+        console.log(menuId)
+        dispatch(getProfilDetail(menuId))
+    }, [])
+
     return (
 
 
@@ -31,8 +44,9 @@ export default function Navbar({ }) {
                             <li className="nav-item">
                                 <Link to={'/menu'} className="nav-link" >menu</Link>
                             </li>
+                            
                             <li className="nav-item">
-                                <a className="nav-link" href="detailProfile.html">Profile</a>
+                            <Link to={`/users/login`} className="nav-link" >Profil</Link>
                             </li>
                         </ul>
                         <span className="navbar-text">

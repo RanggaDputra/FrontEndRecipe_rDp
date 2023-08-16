@@ -16,12 +16,39 @@ export const getMenuDetail = (id) =>
             console.log(err)
         }
     }
+    export const getProfilDetail = () => 
+    async (dispatch) => {
+        try{
+            dispatch({type:"DETAIL_MENU_PENDING"})
+            const result = await axios.post(url+`/users/login`,{headers})
+            // localStorage.setItem("token",result.data.users.token)
+            dispatch({payload:result.data.data,type:"DETAIL_MENU_SUCCESS"})
+        } catch(err){
+            console.log("error")
+            dispatch({payload:err.response,type:"DETAIL_MENU_FAILED"})
+            console.log(err)
+        }
+    }
+    export const getProfilDetailById = (id) => 
+    async (dispatch) => {
+        try{
+            dispatch({type:"DETAIL_MENU_PENDING"})
+            const result = await axios.get(url+`/users/${id}`,{headers})
+            
+            dispatch({payload:result.data.data,type:"DETAIL_MENU_SUCCESS"})
+        } catch(err){
+            console.log("error")
+            dispatch({payload:err.response,type:"DETAIL_MENU_FAILED"})
+            console.log(err)
+        }
+    }
 
-export const getMenu = () => 
+export const getMenu = (page) => 
     async (dispatch) => {
         try{
             dispatch({type:"GET_MENU_PENDING"})
-            const result = await axios.get(url+`/recipe`,{headers})
+            const result = await axios.get(url+`/recipe/detail?page=${page}`,{headers})
+            
             dispatch({payload:result.data.data,type:"GET_MENU_SUCCESS"})
         } catch(err){
             console.log("error")
@@ -86,3 +113,4 @@ export const updateMenu = (data,id,navigate) =>
             console.log(err)
         }
     }
+    

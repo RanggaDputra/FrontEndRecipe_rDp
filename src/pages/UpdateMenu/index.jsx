@@ -9,7 +9,6 @@ import Footer from "../../components/Footer"
 import { useDispatch, useSelector } from "react-redux"
 import { getMenuDetail, updateMenu } from './../../redux/actions/menu'
 
-let token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJndWVzdCIsImVtYWlsIjoiZ3Vlc3RAYWRtaW4uaWQiLCJwaG90byI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjMtMDctMjVUMDc6NTA6MTIuNTgzWiIsImlhdCI6MTY5MDI3MzU2N30.KZtPY60Ip5cZbpavNRhUwF7PXOmZXD56UYxIgXbnKe8`
 
 export default function UpdateMenu() {
     const dispatch = useDispatch()

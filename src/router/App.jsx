@@ -6,6 +6,8 @@ import UpdateMenu from '../pages/UpdateMenu'
 import DetailMenu from '../pages/menuById'
 import Login from '../pages/Auth/Login'
 import AuthChecker from '../components/AuthChecker'
+import Register from '../pages/Auth/Register'
+import Profil from '../pages/Profil'
 
 function App() {
   return (
@@ -15,7 +17,10 @@ function App() {
         <Route path='/' element={<Navigate to="/menu" replace={true}/>}/>
         <Route path='/menu' element={<AuthChecker><Menu/></AuthChecker>}/>
         <Route path='/login' element={<Login />}/>
+        <Route path='/register' element={<Register />}/>
         <Route path='/update-menu/:menuId' element={<UpdateMenu />}/>
+        <Route path='/users/login' element={<Profil />}/>
+        <Route path='/profil/:menuId' element={<Profil />}/>
         <Route path='/menu-detail/:menuId' element={<DetailMenu />}/>
         <Route path='/inputmenu' element={<InputMenu />}/>
       </Routes>

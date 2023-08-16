@@ -7,20 +7,20 @@ import { useNavigate } from 'react-router-dom'
 import Navbar from "../../components/navbar";
 import Footer from "../../components/Footer"
 import '../menuById/index.css'
-import { getMenuDetail} from './../../redux/actions/menu'
+import { getProfilDetailById,getProfilDetail} from './../../redux/actions/menu'
 import { useDispatch, useSelector } from "react-redux"
 
 
-export default function DetailMenu() {
+export default function Profil() {
     const dispatch = useDispatch()
     const {data} = useSelector((state)=>state.detail_menu)
     const navigate = useNavigate()
     const { menuId } = useParams()
     const [photo, setPhoto] = useState(null)
     const [inputData, setInputData] = useState({
-        title: "",
-        ingredients: "",
-        category_id: "1",
+        email: "",
+        // password: "",
+        username: "",
         photo_url: ""
     })
 
@@ -39,24 +39,26 @@ export default function DetailMenu() {
 
     useEffect(() => {
         console.log(menuId)
-        dispatch(getMenuDetail(menuId))
+        dispatch(getProfilDetail(menuId))
+        // dispatch(getProfilDetailById(menuId))
+        
     }, [])
 
     useEffect(()=>{
-        data && setInputData({...inputData,title:data.title,photo_url:data.photo,ingredients:data.ingredients,category_id:data.category_id})
+        data && setInputData({...inputData,email:data.email,photo_url:data.photo,username:data.username})
     },[data])
 
     const postData = (event) => {
         event.preventDefault()
         let BodyformData = new FormData()
-        BodyformData.append("title", inputData.title)
-        BodyformData.append("ingredients", inputData.ingredients)
-        BodyformData.append("category_id", inputData.category_id)
+        BodyformData.append("email", inputData.email)
+        BodyformData.append("password", inputData.password)
+        BodyformData.append("username", inputData.username)
         BodyformData.append("photo", photo)
 
         console.log(BodyformData)
 
-        
+
 
     }
     const onChange = (e) => {
@@ -80,11 +82,11 @@ export default function DetailMenu() {
 
             </div>
             <form onSubmit={postData} className='row col-6 gap-2'>
-                <h1>{inputData.title}</h1>
+                <h1>{inputData.username}</h1>
                 <img src={inputData.photo_url} width={200} />
                 {/* <input type="text" name='title' value={inputData.title} className='form-control col-4' onChange={onChange} placeholder='title' /> */}
                 <h3>Ingredients</h3>
-                <p>{inputData.ingredients}</p>
+                <p>{inputData.email}</p>
                 {/* <input type="text" name='ingredients' value={inputData.ingredients} className='form-control col-4' onChange={onChange} placeholder='ingredients' /> */}
                 {/* <input type="file" name='photo' className='form-control col-4' onChange={onChangePhoto} placeholder='photo' /> */}
 
