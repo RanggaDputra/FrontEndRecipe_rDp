@@ -26,7 +26,7 @@ aplikasi ini dibuat menggunakan :
 * Vercel
 	
 ## Setup
-Langkah - langkah menginstall aplikasi AuksienOnline :
+Steps to install the MyRecipe app :
 
 ```
 1. https://github.com/RanggaDputra/FrontEndRecipe_rDp.git
