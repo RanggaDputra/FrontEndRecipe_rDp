@@ -219,3 +219,17 @@ form{
     margin: 5px;
     color: black;
 }
+.sub-tag{
+    background-color: #EFC81A;
+    color: transparent;
+    width: 5px;
+    height: 70px;
+}
+.size-img img{
+    border: 10px solid #fff;
+    border-radius: 100%;
+    margin-top: 100px;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}

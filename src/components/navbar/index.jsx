@@ -1,29 +1,46 @@
-import React, { Fragment } from "react"
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom"
 import '../navbar/index.css'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux';
-import { useEffect } from "react";
 import { useDispatch} from "react-redux"
 import { getProfilDetail} from './../../redux/actions/menu'
+import jwt_decode from "jwt-decode";
+import { getMenu, deleteMenu, searchMenu } from "./../../redux/actions/menu"
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Navbar({ }) {
     
-    const dispatch = useDispatch()
-    // const {data} = useSelector((state)=>state.detail_menu)
     const auth = useSelector((state) => state.auth.data)
-    const navigate = useNavigate()
-    const { menuId } = useParams()
+    const navigate = useNavigate();
+    const location = useLocation();
+    const token = localStorage.getItem("token");
+    const decodedToken = token ? jwt_decode(token) : null;
+    const { photo, username } = decodedToken || {};
+    const [isLoadingLogout, setIsLoadingLogout] = useState(false);
     const logout = () => {
-
+        
         localStorage.clear()
         navigate('/')
     }
-
-    useEffect(() => {
-        console.log(menuId)
-        dispatch(getProfilDetail(menuId))
-    }, [])
+    const recipesPerPage = 5;
+    const handleConfirmLogout = () => {
+        setIsLoadingLogout(true);
+        localStorage.clear();
+        navigate("/login");
+    };
+    const handleSearch = () => {
+        toast.warn("For more complete features, please login first.", {
+            hideProgressBar: true,
+            autoClose: 2000,
+        });
+    };
+   
+    const handleProfileClick = () => {
+        navigate(`/profile`);
+    };
+    
+    
 
     return (
 
@@ -37,36 +54,77 @@ export default function Navbar({ }) {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarText">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="index.html">Home</a>
-
-                            </li>
-                            <li className="nav-item">
-                                <Link to={'/menu'} className="nav-link" >menu</Link>
-                            </li>
-                            
-                            <li className="nav-item">
-                            <Link to={`/users/login`} className="nav-link" >Profil</Link>
-                            </li>
+                        {token ? (
+                                <li className={`nav-item me-5 ${location.pathname === "/" ? "active" : ""}`}>
+                                    <Link className="nav-link" to="/home" onClick={() => handleActivePage("Home")}>
+                                        Home
+                                    </Link>
+                                </li>
+                            ) : (
+                                <li className={`nav-item me-5 ${location.pathname === "/regis" ? "active" : ""}`}>
+                                    <Link className="nav-link" to="/register" onClick={() => handleActivePage("Register")}>
+                                        Register
+                                    </Link>
+                                </li>
+                            )}
+                            {token ? (
+                                <li className={`nav-item me-5 ${location.pathname === "/add" ? "active" : ""}`}>
+                                    <Link className="nav-link" to="/inputmenu" onClick={() => handleActivePage("AddMenu")}>
+                                        Add Menu
+                                    </Link>
+                                </li>
+                            ) : (
+                                <li className={`nav-item me-5 ${location.pathname === "/login" ? "active" : ""}`}>
+                                    <Link className="nav-link" to="/login" onClick={() => handleActivePage("Login")}>
+                                        Login
+                                    </Link>
+                                </li>
+                            )}
+                            {token ? (
+                                <li className={`nav-item ${location.pathname === "/search" ? "active" : ""}`}>
+                                    <Link className="nav-link" to="/menu" onClick={() => handleActivePage("SearchMenu")}>
+                                        Search Menu
+                                    </Link>
+                                </li>
+                            ) : (
+                                <li className={`nav-item ${location.pathname === "/" ? "active" : ""}`}>
+                                    <Link className="nav-link" to="/" onClick={handleSearch}>
+                                        Search Menu
+                                    </Link>
+                                </li>
+                            )}
                         </ul>
-                        <span className="navbar-text">
-                            {localStorage.getItem("token") &&
-                                <img src={auth?.photo ?? "https://i.pinimg.com/originals/f1/0f/f7/f10ff70a7155e5ab666bcdd1b45b726d.jpg"}/>
-                            }
-                            {
-                                localStorage.getItem("token") ?
-                                    <p>{auth?.username}</p> :
-                                    null
-                            }
-                            {/* <p>Ayudia</p> */}
-                        </span>
-                        {
-                            localStorage.getItem("token") ?
-                                <button className="btn btn-danger" onClick={logout}>Logout</button> :
-                                null
-                        }
+                        
                     </div>
+                    {token ? (
+                        
+                    <div className="user d-flex justify-content-center align-items-center">
+                        <div className="photo me-4">
+                            <img src={photo} alt="Search"  className="rounded-circle" onClick={handleProfileClick} />
+                           
+                        </div>
+                        <div>
+                        <p  style={{paddingLeft:20}}>{username}</p>
+                        <button onClick={handleConfirmLogout} style={{marginTop:-20,fontWeight:'bold'}} className="btn btn-transparent">Logout</button>
+                        </div>
+                    </div>
+                ) : (
+                    <div className="user d-flex justify-content-center align-items-center  visually-hidden">
+                        <div className="photo me-4" >
+                            <img src={auth?.photo} alt="Search"  onClick={handleProfileClick} />
+                        </div>
+                        <div className="text">
+                            <p className="mb-0 text-dark">{auth?.username}</p>
+                            <p className="mb-0">
+                                <p onClick={logout} className="text-dark">
+                                    <strong>Logout</strong>
+                                </p>
+                            </p>
+                        </div>
+                    </div>
+                )}
                 </div>
+               
             </nav>
         </div>
 

@@ -82,3 +82,11 @@ color: white;
 .card23{
     max-width: 540px;
 }
+.photo img{
+
+    border-radius: 100%;
+    width: 60px;
+    height: 60px;
+background-color: red;
+object-fit: cover;
+}

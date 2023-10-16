@@ -32,8 +32,21 @@ export const getMenuDetail = (id) =>
     export const getProfilDetailById = (id) => 
     async (dispatch) => {
         try{
-            dispatch({type:"DETAIL_MENU_PENDING"})
+            dispatch({type:"USERS_MENU_PENDING"})
             const result = await axios.get(url+`/users/${id}`,{headers})
+            
+            dispatch({payload:result.data.data,type:"USERS_MENU_SUCCES"})
+        } catch(err){
+            console.log("error")
+            dispatch({payload:err.response,type:"USERS_MENU_FAILED"})
+            console.log(err)
+        }
+    }
+    export const getMenuByUsers = (id) => 
+    async (dispatch) => {
+        try{
+            dispatch({type:"DETAIL_MENU_PENDING"})
+            const result = await axios.get(url+`/recipe/users/${id}`,{headers})
             
             dispatch({payload:result.data.data,type:"DETAIL_MENU_SUCCESS"})
         } catch(err){
@@ -47,7 +60,7 @@ export const getMenu = (page) =>
     async (dispatch) => {
         try{
             dispatch({type:"GET_MENU_PENDING"})
-            const result = await axios.get(url+`/recipe/detail?page=${page}`,{headers})
+            const result = await axios.get(url+`/recipe`,{headers})
             
             dispatch({payload:result.data.data,type:"GET_MENU_SUCCESS"})
         } catch(err){
@@ -76,7 +89,7 @@ export const deleteMenu = (id,navigate) =>
             dispatch({type:"DELETE_MENU_PENDING"})
             const result = await axios.delete(url+`/recipe/${id}`,{headers})
             console.log(result)
-            navigate('/')
+            navigate('/profile')
             dispatch({payload:result.data.data,type:"DELETE_MENU_SUCCESS"})
         } catch(err){
             console.log("error")
@@ -114,3 +127,17 @@ export const updateMenu = (data,id,navigate) =>
         }
     }
     
+    export const updateProfil = (data,id,navigate) => 
+    async (dispatch) => {
+        try{
+            dispatch({type:"PUT_USERS_PENDING"})
+            const result = await axios.put(url+`/users/${id}`,data,{headers})
+            console.log(result)
+            navigate('/')
+            dispatch({payload:result.data.data,type:"PUT_USERS_SUCCESS"})
+        } catch(err){
+            console.log("error")
+            dispatch({payload:err.response.data.message,type:"PUT_USERS_FAILED"})
+            console.log(err)
+        }
+    }
