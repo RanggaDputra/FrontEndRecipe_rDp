@@ -29,7 +29,7 @@ aplikasi ini dibuat menggunakan :
 Langkah - langkah menginstall aplikasi AuksienOnline :
 
 ```
-1. git clone https://github.com/ariffebri22/RecipeWEBV2.git
+1. https://github.com/RanggaDputra/FrontEndRecipe_rDp.git
 2. cd RecipeWEBV2 -> Go To folder Repository in local folder
 3. npm install in terminal
 ```
