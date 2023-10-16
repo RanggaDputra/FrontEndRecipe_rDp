@@ -10,7 +10,7 @@
 The "Recipes" app is the perfect culinary guide for all cooking lovers. With thousands of recipes from around the world, this app will guide you through the preparation steps of delicious and enticing dishes. Whether you are an experienced chef or a beginner looking to cook, "Recipes" has something for everyone.
 
 ## Feature
-Aplikasi Auksien Online mempunyai beberapa fitur yaitu :
+The MyRecipe app has several features, namely :
 * Thousands of Recipes: Explore a wide variety of recipes from different cuisines, including local and international cuisines.
 * Easy Search: Find recipes by ingredients, preparation time, or type of cuisine.
 * Cuisine Categories: There are cuisine categories such as vegetarian, snacks, desserts, and more.
@@ -18,7 +18,7 @@ Aplikasi Auksien Online mempunyai beberapa fitur yaitu :
 * Favorite Recipes: Save your favorite recipes to access them later.
 	
 ## Build With
-aplikasi ini dibuat menggunakan : 
+This application was created using : 
 * "react": "^18.2.0"
 * "redux": "^4.2.1",
 * "axios": "^1.4.0",
