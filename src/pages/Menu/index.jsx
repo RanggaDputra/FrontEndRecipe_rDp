@@ -92,12 +92,12 @@ export default function Menu() {
                 </div>
                 {/*  */}
                 <div className="m-3 ">
-                    <p className="d-inline-flex gap-1">
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div className="d-inline-flex gap-1">
+                    <div className="dropdown">
+                        <button className="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             Select Category
                         </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <li>
                                 <a className="btn btn-transparent" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" onClick={() => handleCategoryFilterChange("appetizer")}>
                                     Appetizers
@@ -128,7 +128,7 @@ export default function Menu() {
 
                         {/* <button type="button" className="btn btn-success btn23" ><Link to={`/profil/${item.id}`} className="anchor">Input Menu</Link></button> */}
 
-                    </p>
+                    </div>
                 </div>
                 {isLoading && <div className="spinner-border text-dark subs-load" role="status">
                     <span className="sr-only"></span>
