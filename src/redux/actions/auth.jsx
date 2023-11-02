@@ -10,7 +10,7 @@ export const login = (data,navigate) =>
             localStorage.setItem("token",result.data.users.token)
             
             dispatch({payload:result.data.users,type:"AUTH_LOGIN_SUCCESS"})
-            navigate('/')
+            navigate('/home')
         } catch(err){
             console.log("error")
             dispatch({payload:err.response.data.message,type:"AUTH_LOGIN_FAILED"})

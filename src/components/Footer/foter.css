@@ -104,10 +104,23 @@
 }
 
 .crd12 {
+    
     border: none !important;
 }
 
 .crd {
     background-color: yellow !important;
     border: none !important;
+}
+@media (max-width:576px){
+    .crdb h5{
+
+       margin-left: -10px !important;
+       
+    }
+    .crdb p{
+
+        margin-left: -5px !important;
+        
+     }
 }

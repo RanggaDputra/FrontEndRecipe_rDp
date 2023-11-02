@@ -50,7 +50,7 @@ export default function Profil() {
 
     const indexOfLastRecipe = currentPage * recipesPerPage;
     const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
-    const currentRecipes = data ? data.slice(indexOfFirstRecipe, indexOfLastRecipe) : [];
+    const currentRecipes = data ? data.slice(indexOfFirstRecipe, indexOfLastRecipe) : '';
 
     const truncateDescription = (description) => {
         const words = description.split(" ");
@@ -80,8 +80,8 @@ export default function Profil() {
     return (
         <div className="container">
             <Navbar />
-            <div className="row" style={{marginLeft:130,marginTop:50}}>
-                <div className="col-6 d-flex">
+            <div id="boxs-tag"className="row" style={{marginLeft:130,marginTop:50}}>
+                <div id="subs-box" className="col-md-6 d-flex ">
                     
                     <div className="">
                         <div className="sub-tag">a</div>
@@ -100,7 +100,7 @@ export default function Profil() {
                         )}
                     </div>
                 </div>
-                <div className="col-6">
+                <div id="subs-box2" className="col-md-6">
                     <div className="align-items-center pe-5">
                         <div className="text pt-4">
                             <p style={{float:'right'}} className="mb-0 text-dark">{formattedDate}</p>
@@ -115,7 +115,7 @@ export default function Profil() {
                                 <p className="text-center mt-4">Error: {errorMessage}</p>
                             ) : data && data.length > 0 ? (
                                 currentRecipes.map((recipe, index) => (
-                                    <div key={index} className="row ms-1 ps-5">
+                                    <div key={index} className="row ms-1 ps-3">
                                         <div className="col-md-4 mt-5 imgCover rounded-4 p-0 me-5" style={{ width: "18rem" }}>
                                             <img src={recipe.photo} alt="Search" className="rounded-4" style={{ width: "18rem", height: "18rem", objectFit: "cover" }} onClick={() => handleDetailMenu(recipe.id)} />
                                         </div>

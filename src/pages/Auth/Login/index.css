@@ -74,3 +74,51 @@ text-decoration: none !important;
     text-decoration: none;
     color: #EFC81A;
 }
+
+@media (max-width: 576px) { 
+    #sub-title {
+        margin-left: 0px;
+        
+        
+    }
+    #title2{
+       
+        width: 300px;
+        margin-left: 55px ;
+    }
+    #subs-title{
+        margin-left: 0px;
+    }
+    #subs-title input{
+        width: 300px;
+    }
+    #title{
+       
+        width: 300px;
+    }
+    #title3{
+       
+        width: 300px;
+        margin-left: -90px !important;
+        
+    }
+    #sub-title input{
+        width: 300px;
+        
+        
+    }
+    #sub-title2{
+        margin-left: 50px;
+        
+    }
+    #sub-btn{
+        width: 300px;
+        margin-left: -90px;
+        
+    }
+    .txt-6{
+        margin-left: -90px;
+        
+    }
+    
+}

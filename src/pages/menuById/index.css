@@ -232,4 +232,45 @@ form{
     width: 300px;
     height: 300px;
     object-fit: cover;
+}.subs-input input{
+    margin-bottom: 10px;
+}.subs-input{
+    margin-top: 30px !important;
+}
+
+@media (max-width:576px) {
+    #boxs-tag{
+        
+        margin-left: 0px!important;
+        
+    }
+    #subs-box{
+        width: 180px!important;
+    }
+    #subs-box2{
+        width: 155px!important;
+        
+        margin-left: 190px;
+        margin-top: -100px;
+    }
+    .subs-input input{
+        margin-left: -80px!important;
+        margin-bottom: 10px;
+        width: 300px!important;  
+}.subs-input{
+    margin-top: 30px !important;
+}
+.subss-box{
+    width: 100px !important;
+}
+.sub-title{
+    margin-left: -40px !important;
+}
+.sub-title i{
+    margin-top: 13px;
+    margin-left: 0px !important;
+}.subss-box2{
+    margin-top: -100px !important;
+    margin-left: 200px !important;
+}
 }

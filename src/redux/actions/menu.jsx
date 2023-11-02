@@ -16,6 +16,14 @@ export const getMenuDetail = (id) =>
             console.log(err)
         }
     }
+
+    export const detailMenuReset = () => async (dispatch) => {
+        try {
+          dispatch({ type: 'DETAIL_MENU_RESET' });
+        } catch (err) {
+          console.log('error when reset detail menu', err);
+        }
+      };
     export const getProfilDetail = () => 
     async (dispatch) => {
         try{
@@ -111,6 +119,60 @@ export const postMenu = (data,navigate) =>
             console.log(err)
         }
     }
+    export const postComment = (id,text) => 
+    async (dispatch) => {
+        try{
+            dispatch({type:"POST_COMMENT_PENDING"})
+            const result = await axios.post(url+`/comment/${id}`,text,{ 
+                headers:{
+                Authorization : `Bearer ${localStorage.getItem("token")}`,
+                "Content-Type" : "application/x-www-form-urlencoded"
+            }})
+            console.log(result)
+            dispatch({payload:result.data.data,type:"POST_COMMENT_SUCCESS"})
+        } catch(err){
+            console.log("error")
+            dispatch({payload:err.response,type:"POST_COMMENT_FAILED"})
+            console.log(err)
+        }
+    }
+
+    export const getComment = (id) => 
+    async (dispatch) => {
+        try{
+            dispatch({type:"GET_COMMENT_PENDING"})
+            const result = await axios.get(url+`/comment/${id}`,{headers})
+            dispatch({payload:result.data.data,type:"GET_COMMENT_SUCCESS"})
+        } catch(err){
+            console.log("error")
+            
+            dispatch({payload:err.response,type:"GET_COMMENT_FAILED"})
+            console.log(err)
+        }
+    }
+
+    export const deleteComment = (id) => 
+    async (dispatch) => {
+        try{
+            dispatch({type:"DELETE_COMMENT_PENDING"})
+            const result = await axios.delete(url+`/comment/${id}`,{headers})
+            console.log(result)
+            
+            dispatch({payload:result.data.data,type:"DELETE_COMMENT_SUCCESS"})
+        } catch(err){
+            console.log("error")
+            dispatch({payload:err.response.data.message,type:"DELETE_COMMENT_FAILED"})
+            console.log(err)
+        }
+    }
+
+    export const commentStatusReset = () => async (dispatch) => {
+        try {
+          dispatch({ type: 'COMMENT_STATUS_RESET' });
+        } catch (err) {
+          console.log('error when reset status comment', err);
+        }
+      };
 
 export const updateMenu = (data,id,navigate) => 
     async (dispatch) => {
